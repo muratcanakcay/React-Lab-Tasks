@@ -49,25 +49,28 @@ const GameAdmin = () => {
 
   const [playerDatas, setPlayerDatas] = useState(initialState());
 
-  const clickPlay = (data: IPlayerData) => {
-    playerDatas.map((PlayerData) => {
-      if (PlayerData === data) {
-        return {
-          playerNo: PlayerData.playerNo,
-          playerName: PlayerData.playerName,
-          isPlaying: true,
-          playCount: PlayerData.playCount + 1,
-        };
-      } else {
-        return {
-          playerNo: PlayerData.playerNo,
-          playerName: PlayerData.playerName,
-          isPlaying: false,
-          playCount: PlayerData.playCount,
-        };
-      }
-    });
-  };
+  const clickPlay = (data: IPlayerData) =>
+    setPlayerDatas(
+      playerDatas.map((PlayerData) => {
+        if (PlayerData === data) {
+          console.log(PlayerData);
+          return {
+            playerNo: PlayerData.playerNo,
+            playerName: PlayerData.playerName,
+            isPlaying: true,
+            playCount: PlayerData.playCount + 1,
+          };
+        } else {
+          console.log(PlayerData);
+          return {
+            playerNo: PlayerData.playerNo,
+            playerName: PlayerData.playerName,
+            isPlaying: false,
+            playCount: PlayerData.playCount,
+          };
+        }
+      })
+    );
 
   return (
     <div>
