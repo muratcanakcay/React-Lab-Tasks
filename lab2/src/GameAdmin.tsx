@@ -8,27 +8,25 @@ interface IPlayerData {
   isPlaying: boolean;
 }
 
-function NameBox(props: { playerData: any; changeName: any }) {
-  return (
-    <div>
-      <div className="row m-3 mb-2">
-        <div className="col-auto ">
-          <label htmlFor="name">
-            Set name of <b>{props.playerData.playerNo}</b>:
-          </label>
-        </div>
-        <div className="col">
-          <input
-            id="namebox"
-            className="w-100"
-            value={props.playerData.playerName}
-            onChange={(e) => props.changeName(props.playerData, e.target.value)}
-          />
-        </div>
+const NameBox = (props: { playerData: any; changeName: any }) => (
+  <div>
+    <div className="row m-3 mb-2">
+      <div className="col-auto ">
+        <label htmlFor="name">
+          Set name of <b>{props.playerData.playerNo}</b>:
+        </label>
+      </div>
+      <div className="col">
+        <input
+          id="namebox"
+          className="w-100"
+          value={props.playerData.playerName}
+          onChange={(e) => props.changeName(props.playerData, e.target.value)}
+        />
       </div>
     </div>
-  );
-}
+  </div>
+);
 
 const GameAdmin = () => {
   //initial state of players
@@ -55,18 +53,31 @@ const GameAdmin = () => {
         if (PlayerData === data) {
           console.log(PlayerData);
           return {
-            playerNo: PlayerData.playerNo,
-            playerName: PlayerData.playerName,
+            ...PlayerData,
             isPlaying: true,
             playCount: PlayerData.playCount + 1,
           };
         } else {
           console.log(PlayerData);
           return {
-            playerNo: PlayerData.playerNo,
-            playerName: PlayerData.playerName,
+            ...PlayerData,
             isPlaying: false,
-            playCount: PlayerData.playCount,
+          };
+        }
+      })
+    );
+
+  const changeName = (data: IPlayerData, name: string) =>
+    setPlayerDatas(
+      playerDatas.map((PlayerData) => {
+        if (PlayerData === data) {
+          return {
+            ...PlayerData,
+            playerName: name,
+          };
+        } else {
+          return {
+            ...PlayerData,
           };
         }
       })
@@ -84,63 +95,17 @@ const GameAdmin = () => {
         );
       })}
 
-      {/* {this.state.PlayerDatas.map((PlayerData) => {
-          return (
-            <NameBox
-              key={PlayerData.playerNo}
-              playerData={PlayerData}
-              changeName={this.changeName}
-            />
-          );
-        })} */}
+      {playerDatas.map((PlayerData) => {
+        return (
+          <NameBox
+            key={PlayerData.playerNo}
+            playerData={PlayerData}
+            changeName={changeName}
+          />
+        );
+      })}
     </div>
   );
 };
-
-// button clicked function
-// const clickPlay = (data: IPlayerData) => {
-//   this.setState({
-//     PlayerDatas: this.state.PlayerDatas.map((PlayerData) => {
-//       if (PlayerData === data) {
-//         return {
-//           playerNo: PlayerData.playerNo,
-//           playerName: PlayerData.playerName,
-//           isPlaying: true,
-//           playCount: PlayerData.playCount + 1,
-//         };
-//       } else {
-//         return {
-//           playerNo: PlayerData.playerNo,
-//           playerName: PlayerData.playerName,
-//           isPlaying: false,
-//           playCount: PlayerData.playCount,
-//         };
-//       }
-//     }),
-//   });
-// };
-
-// // name typed in box function
-// changeName = (data: IPlayerData, name: string) => {
-//   this.setState((state) => ({
-//     PlayerDatas: state.PlayerDatas.map((PlayerData) => {
-//       if (PlayerData === data) {
-//         return {
-//           playerNo: PlayerData.playerNo,
-//           playerName: name,
-//           isPlaying: PlayerData.isPlaying,
-//           playCount: PlayerData.playCount,
-//         };
-//       } else {
-//         return {
-//           playerNo: PlayerData.playerNo,
-//           playerName: PlayerData.playerName,
-//           isPlaying: PlayerData.isPlaying,
-//           playCount: PlayerData.playCount,
-//         };
-//       }
-//     }),
-//   }));
-// };
 
 export default GameAdmin;
