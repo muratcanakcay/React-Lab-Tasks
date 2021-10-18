@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Player from "./Player";
+import NameBox from "./NameBox";
 
 interface IPlayerData {
   playerNo: string;
@@ -8,124 +9,82 @@ interface IPlayerData {
   isPlaying: boolean;
 }
 
-interface IProps {}
-
-interface IState {
-  PlayerDatas: IPlayerData[];
-}
-
-function NameBox(props: { playerData: any; changeName: any }) {
-  return (
-    <div>
-      <div className="row m-3 mb-2">
-        <div className="col-auto ">
-          <label htmlFor="name">
-            Set name of <b>{props.playerData.playerNo}</b>:
-          </label>
-        </div>
-        <div className="col">
-          <input
-            id="namebox"
-            className="w-100"
-            value={props.playerData.playerName}
-            onChange={(e) => props.changeName(props.playerData, e.target.value)}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-class GameAdmin extends React.Component<IProps, IState> {
+const GameAdmin = () => {
   //initial state of players
-  state = {
-    PlayerDatas: [
-      {
-        playerNo: "Player One",
-        playerName: "",
-        playCount: 0,
-        isPlaying: false,
-      },
-      {
-        playerNo: "Player Two",
-        playerName: "",
-        playCount: 0,
-        isPlaying: false,
-      },
-    ],
-  };
+  const initialState = () => [
+    {
+      playerNo: "Player One",
+      playerName: "",
+      playCount: 0,
+      isPlaying: false,
+    },
+    {
+      playerNo: "Player Two",
+      playerName: "",
+      playCount: 0,
+      isPlaying: false,
+    },
+  ];
 
-  // button clicked function
-  clickPlay = (data: IPlayerData) => {
-    this.setState({
-      PlayerDatas: this.state.PlayerDatas.map((PlayerData) => {
+  const [playerDatas, setPlayerDatas] = useState(initialState());
+
+  const clickPlay = (data: IPlayerData) =>
+    setPlayerDatas(
+      playerDatas.map((PlayerData) => {
         if (PlayerData === data) {
           return {
-            playerNo: PlayerData.playerNo,
-            playerName: PlayerData.playerName,
+            ...PlayerData,
             isPlaying: true,
             playCount: PlayerData.playCount + 1,
           };
         } else {
           return {
-            playerNo: PlayerData.playerNo,
-            playerName: PlayerData.playerName,
+            ...PlayerData,
             isPlaying: false,
-            playCount: PlayerData.playCount,
           };
         }
-      }),
-    });
-  };
+      })
+    );
 
-  // name typed in box function
-  changeName = (data: IPlayerData, name: string) => {
-    this.setState((state) => ({
-      PlayerDatas: state.PlayerDatas.map((PlayerData) => {
+  const changeName = (data: IPlayerData, name: string) =>
+    setPlayerDatas(
+      playerDatas.map((PlayerData) => {
         if (PlayerData === data) {
           return {
-            playerNo: PlayerData.playerNo,
+            ...PlayerData,
             playerName: name,
-            isPlaying: PlayerData.isPlaying,
-            playCount: PlayerData.playCount,
           };
         } else {
           return {
-            playerNo: PlayerData.playerNo,
-            playerName: PlayerData.playerName,
-            isPlaying: PlayerData.isPlaying,
-            playCount: PlayerData.playCount,
+            ...PlayerData,
           };
         }
-      }),
-    }));
-  };
-
-  render() {
-    return (
-      <div>
-        {this.state.PlayerDatas.map((PlayerData) => {
-          return (
-            <Player
-              key={PlayerData.playerNo}
-              playerData={PlayerData}
-              clickPlay={this.clickPlay}
-            />
-          );
-        })}
-
-        {this.state.PlayerDatas.map((PlayerData) => {
-          return (
-            <NameBox
-              key={PlayerData.playerNo}
-              playerData={PlayerData}
-              changeName={this.changeName}
-            />
-          );
-        })}
-      </div>
+      })
     );
-  }
-}
+
+  return (
+    <div>
+      {playerDatas.map((PlayerData) => {
+        return (
+          <Player
+            key={PlayerData.playerNo}
+            playerData={PlayerData}
+            clickPlay={clickPlay}
+          />
+        );
+      })}
+
+      {playerDatas.map((PlayerData) => {
+        return (
+          <NameBox
+            key={PlayerData.playerNo}
+            playerData={PlayerData}
+            changeName={changeName}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 export default GameAdmin;
