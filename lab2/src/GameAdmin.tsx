@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Player from "./Player";
 
 interface IPlayerData {
@@ -6,12 +6,6 @@ interface IPlayerData {
   playerName: string;
   playCount: number;
   isPlaying: boolean;
-}
-
-interface IProps {}
-
-interface IState {
-  PlayerDatas: IPlayerData[];
 }
 
 function NameBox(props: { playerData: any; changeName: any }) {
@@ -36,85 +30,58 @@ function NameBox(props: { playerData: any; changeName: any }) {
   );
 }
 
-class GameAdmin extends React.Component<IProps, IState> {
+const GameAdmin = () => {
   //initial state of players
-  state = {
-    PlayerDatas: [
-      {
-        playerNo: "Player One",
-        playerName: "",
-        playCount: 0,
-        isPlaying: false,
-      },
-      {
-        playerNo: "Player Two",
-        playerName: "",
-        playCount: 0,
-        isPlaying: false,
-      },
-    ],
-  };
+  const initialState = () => [
+    {
+      playerNo: "Player One",
+      playerName: "",
+      playCount: 0,
+      isPlaying: false,
+    },
+    {
+      playerNo: "Player Two",
+      playerName: "",
+      playCount: 0,
+      isPlaying: false,
+    },
+  ];
 
-  // button clicked function
-  clickPlay = (data: IPlayerData) => {
-    this.setState({
-      PlayerDatas: this.state.PlayerDatas.map((PlayerData) => {
-        if (PlayerData === data) {
-          return {
-            playerNo: PlayerData.playerNo,
-            playerName: PlayerData.playerName,
-            isPlaying: true,
-            playCount: PlayerData.playCount + 1,
-          };
-        } else {
-          return {
-            playerNo: PlayerData.playerNo,
-            playerName: PlayerData.playerName,
-            isPlaying: false,
-            playCount: PlayerData.playCount,
-          };
-        }
-      }),
+  const [playerDatas, setPlayerDatas] = useState(initialState());
+
+  const clickPlay = (data: IPlayerData) => {
+    playerDatas.map((PlayerData) => {
+      if (PlayerData === data) {
+        return {
+          playerNo: PlayerData.playerNo,
+          playerName: PlayerData.playerName,
+          isPlaying: true,
+          playCount: PlayerData.playCount + 1,
+        };
+      } else {
+        return {
+          playerNo: PlayerData.playerNo,
+          playerName: PlayerData.playerName,
+          isPlaying: false,
+          playCount: PlayerData.playCount,
+        };
+      }
     });
   };
 
-  // name typed in box function
-  changeName = (data: IPlayerData, name: string) => {
-    this.setState((state) => ({
-      PlayerDatas: state.PlayerDatas.map((PlayerData) => {
-        if (PlayerData === data) {
-          return {
-            playerNo: PlayerData.playerNo,
-            playerName: name,
-            isPlaying: PlayerData.isPlaying,
-            playCount: PlayerData.playCount,
-          };
-        } else {
-          return {
-            playerNo: PlayerData.playerNo,
-            playerName: PlayerData.playerName,
-            isPlaying: PlayerData.isPlaying,
-            playCount: PlayerData.playCount,
-          };
-        }
-      }),
-    }));
-  };
+  return (
+    <div>
+      {playerDatas.map((PlayerData) => {
+        return (
+          <Player
+            key={PlayerData.playerNo}
+            playerData={PlayerData}
+            clickPlay={clickPlay}
+          />
+        );
+      })}
 
-  render() {
-    return (
-      <div>
-        {this.state.PlayerDatas.map((PlayerData) => {
-          return (
-            <Player
-              key={PlayerData.playerNo}
-              playerData={PlayerData}
-              clickPlay={this.clickPlay}
-            />
-          );
-        })}
-
-        {this.state.PlayerDatas.map((PlayerData) => {
+      {/* {this.state.PlayerDatas.map((PlayerData) => {
           return (
             <NameBox
               key={PlayerData.playerNo}
@@ -122,10 +89,55 @@ class GameAdmin extends React.Component<IProps, IState> {
               changeName={this.changeName}
             />
           );
-        })}
-      </div>
-    );
-  }
-}
+        })} */}
+    </div>
+  );
+};
+
+// button clicked function
+// const clickPlay = (data: IPlayerData) => {
+//   this.setState({
+//     PlayerDatas: this.state.PlayerDatas.map((PlayerData) => {
+//       if (PlayerData === data) {
+//         return {
+//           playerNo: PlayerData.playerNo,
+//           playerName: PlayerData.playerName,
+//           isPlaying: true,
+//           playCount: PlayerData.playCount + 1,
+//         };
+//       } else {
+//         return {
+//           playerNo: PlayerData.playerNo,
+//           playerName: PlayerData.playerName,
+//           isPlaying: false,
+//           playCount: PlayerData.playCount,
+//         };
+//       }
+//     }),
+//   });
+// };
+
+// // name typed in box function
+// changeName = (data: IPlayerData, name: string) => {
+//   this.setState((state) => ({
+//     PlayerDatas: state.PlayerDatas.map((PlayerData) => {
+//       if (PlayerData === data) {
+//         return {
+//           playerNo: PlayerData.playerNo,
+//           playerName: name,
+//           isPlaying: PlayerData.isPlaying,
+//           playCount: PlayerData.playCount,
+//         };
+//       } else {
+//         return {
+//           playerNo: PlayerData.playerNo,
+//           playerName: PlayerData.playerName,
+//           isPlaying: PlayerData.isPlaying,
+//           playCount: PlayerData.playCount,
+//         };
+//       }
+//     }),
+//   }));
+// };
 
 export default GameAdmin;
