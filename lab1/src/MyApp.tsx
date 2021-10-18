@@ -3,7 +3,12 @@ import './MyApp.css';
 import StudentsList from './StudentsList';
 
 function MyApp() {
-  return StudentsList();
+  return (
+      <div>
+        <StudentsList />
+      </div>
+  )
+  
   // return (
     
     // <div className="App">
