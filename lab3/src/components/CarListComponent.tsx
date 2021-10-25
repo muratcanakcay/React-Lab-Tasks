@@ -7,7 +7,7 @@ const CarListComponent: React.FC<{ carsList: Car[] }> = ({ carsList }) => {
     return <CarListItemComponent passedCar={car} />;
   });
 
-  return <div>{renderedCarsList}</div>;
+  return <div className="container">{renderedCarsList}</div>;
 };
 
 export default CarListComponent;
