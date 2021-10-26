@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CarListItemComponent from "./CarsListItemComponent";
+import CarListItemComponent from "./CarListItemComponent";
 import { Car } from "../data/Car";
 
 const CarListComponent: React.FC<{ carsList: Car[]; searchTerm: string }> = ({

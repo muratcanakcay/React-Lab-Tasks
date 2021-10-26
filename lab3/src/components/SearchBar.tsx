@@ -14,7 +14,7 @@ const SearchBar: React.FC<{ onSubmit: (term: string) => void }> = ({
   return (
     <div className="container mt-4">
       <form className="form" onSubmit={onFormSubmit}>
-        <div className="row align-items-start">
+        <div className="row align-items-start g-0">
           <div className="col-sm-2">
             <label>Car search</label>
           </div>
