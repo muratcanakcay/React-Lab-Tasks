@@ -19,7 +19,9 @@ const CarListItemComponent: React.FC<{ passedCar: Car }> = ({ passedCar }) => {
             src={passedCar.image}
           />
         </div>
-        <div className="col car-name">{passedCar.name}</div>
+        <div className="col car-name">
+          <span className="align-middle">{passedCar.name}</span>
+        </div>
         <div className="col car-info">
           <div className="row">{passedCar.seats} seats</div>
           <div className="row">{passedCar.doors} doors</div>
