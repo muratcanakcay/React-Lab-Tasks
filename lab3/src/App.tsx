@@ -6,10 +6,17 @@ import Cars from "./data/cars.json";
 
 const App: React.FC = () => {
   const [carsList, setCarsList] = useState(Cars);
+  const [term, setTerm] = useState("");
+
+  const onTermSubmit = (term: string) => {
+    setTerm(term);
+    console.log("app says:", term);
+  };
+
   return (
     <div className="container">
-      <SearchBar />
-      <CarListComponent carsList={carsList} />
+      <SearchBar onSubmit={onTermSubmit} />
+      <CarListComponent carsList={carsList} searchTerm={term} />
     </div>
   );
 };
