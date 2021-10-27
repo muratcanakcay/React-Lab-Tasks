@@ -6,20 +6,18 @@ const PriceBox: React.FC<{
     editPriceMode: boolean
     onPriceChange: (newPrice: string) => void
 }> = ({ passedCar, editPriceMode, onPriceChange }) => {
+
     const [newPrice, setNewPrice] = useState(passedCar.pricePerDay.toString());
 
     const onFormSubmit = (e: any) => {
         e.preventDefault();
-
         onPriceChange(newPrice)
-
-        console.log("submitted!", newPrice)
     };
 
     if (editPriceMode) {
         return (
             <div className="row mb-2">
-                <p>Enter new price</p>
+                <h5>Enter new price</h5>
                 <form className="form" onSubmit={onFormSubmit}>
                     <input
                         value={newPrice}
@@ -31,7 +29,7 @@ const PriceBox: React.FC<{
     else {
         return (
             <div className="row">
-                <p>Price per day</p>
+                <h5>Price per day</h5>
                 <h4>
                     {passedCar.pricePerDay} PLN
                 </h4>
