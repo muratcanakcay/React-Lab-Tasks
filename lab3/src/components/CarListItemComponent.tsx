@@ -11,10 +11,11 @@ const CarListItemComponent: React.FC<{
     }
 
     return (
-        <div className="carListItemComponent row border shadow-sm p-3">
+        <div className="carListItemComponent row border p-3">
 
-            <div className="col-6 col-md-3 col-lg-2">
-                <div >
+            {/* TODO: align pics vertically in border */}
+            <div className="col-6 col-md-3 col-lg-2 border ">
+                <div>
                     <img
                         className="car-image img-fluid"
                         alt={passedCar.name}
