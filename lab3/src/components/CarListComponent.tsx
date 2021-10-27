@@ -17,8 +17,9 @@ const CarListComponent: React.FC = () => {
     }
 
     const onEditSubmitted = (passedCar: Car, newPrice: number) => {
+        setCarsList(carsList.map((car) => car !== passedCar ? car : { ...passedCar, pricePerDay: newPrice }))
 
-
+        console.log("new price", newPrice)
     }
 
     const renderedCarsList = carsList.map((car: Car) => {

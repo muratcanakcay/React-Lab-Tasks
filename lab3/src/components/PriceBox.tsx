@@ -13,8 +13,6 @@ const PriceBox: React.FC<{
 
         onPriceChange(newPrice)
 
-
-
         console.log("submitted!", newPrice)
     };
 

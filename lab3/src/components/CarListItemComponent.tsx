@@ -6,7 +6,7 @@ const CarListItemComponent: React.FC<{
     passedCar: Car,
     deleteCallback: (passedCar: Car) => void,
     editCallback: (passedCar: Car, newPrice: number) => void
-}> = ({ passedCar, deleteCallback }) => {
+}> = ({ passedCar, deleteCallback, editCallback }) => {
 
     const [editPriceMode, setEditPriceMode] = useState(false)
 
@@ -18,7 +18,7 @@ const CarListItemComponent: React.FC<{
         const newPrice = parseInt(newPriceString, 10)
 
         if (!isNaN(newPrice) && newPrice > 0) {
-            console.log("updating price!")
+            editCallback(passedCar, newPrice)
         }
 
         setEditPriceMode(!editPriceMode)
@@ -56,10 +56,12 @@ const CarListItemComponent: React.FC<{
                     <div className="col-12 col-md-3 d-flex justify-content-end">
                         <div>
                             <PriceBox passedCar={passedCar} editPriceMode={editPriceMode} onPriceChange={onPriceChange} />
-                            <div className="btn-group">
-                                <button className="btn-dark w-100" onClick={() => setEditPriceMode(!editPriceMode)}>Edit</button>
-                                <button className="btn-danger w-100 ms-3" onClick={onDelete}>Delete</button>
-                            </div>
+                            {!editPriceMode &&
+                                <div className="btn-group">
+                                    <button className="btn-dark w-100" onClick={() => setEditPriceMode(!editPriceMode)}>Edit</button>
+                                    <button className="btn-danger w-100 ms-3" onClick={onDelete}>Delete</button>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
