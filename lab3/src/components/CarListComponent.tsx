@@ -13,12 +13,17 @@ const CarListComponent: React.FC = () => {
     };
 
     const onDeleteClicked = (passedCar: Car) => {
-        setCarsList(carsList.filter((car) => car != passedCar))
+        setCarsList(carsList.filter((car) => car !== passedCar))
+    }
+
+    const onEditSubmitted = (passedCar: Car, newPrice: number) => {
+
+
     }
 
     const renderedCarsList = carsList.map((car: Car) => {
         if (car.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-            return <CarListItemComponent passedCar={car} deleteCallback={onDeleteClicked} />;
+            return <CarListItemComponent passedCar={car} deleteCallback={onDeleteClicked} editCallback={onEditSubmitted} />;
         }
         else return "";
     });
