@@ -6,14 +6,13 @@ import Cars from "../data/cars.json";
 const CarListComponent: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
     const [carsList, setCarsList] = useState(Cars);
 
-    const onDeleteClicked = (indexNo: number) => {
-        setCarsList(carsList.filter((car, index) => index != indexNo))
+    const onDeleteClicked = (passedCar: Car) => {
+        setCarsList(carsList.filter((car) => car != passedCar))
     }
 
-    const renderedCarsList = carsList.map((car: Car, index: number) => {
+    const renderedCarsList = carsList.map((car: Car) => {
         if (car.name.toLowerCase().includes(searchTerm.toLowerCase())) {
             return <CarListItemComponent passedCar={car}
-                indexNo={index}
                 deleteCallback={onDeleteClicked} />;
         } else return "";
     });

@@ -3,6 +3,7 @@ import CarListComponent from "./components/CarListComponent";
 import SearchBar from "./components/SearchBar";
 
 const App: React.FC = () => {
+    //TODO: move search state to CarListComponent
     const [term, setTerm] = useState("");
 
     const onTermSubmit = (term: string) => {

@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { Car } from "../data/Car";
-import "./CarListItemComponent.css"; // TODO: not needed anymore
 
 const CarListItemComponent: React.FC<{
     passedCar: Car,
-    indexNo: number,
-    deleteCallback: (indexNo: number) => void
-}> = ({ passedCar, indexNo, deleteCallback }) => {
+    deleteCallback: (passedCar: Car) => void
+}> = ({ passedCar, deleteCallback }) => {
 
     const onDelete = () => {
-        deleteCallback(indexNo);
+        deleteCallback(passedCar);
     }
-
 
     return (
         <div className="carListItemComponent row border shadow-sm p-3">
