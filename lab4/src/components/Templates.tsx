@@ -1,3 +1,9 @@
+export interface NameTemplate {
+    firstName: string
+    lastName: string
+    email: string
+}
+
 export interface AddressTemplate {
     deliveryAddress: AddressDetailsTemplate
     invoiceAddress: AddressDetailsTemplate

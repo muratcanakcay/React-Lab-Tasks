@@ -2,14 +2,16 @@ import React, { useState } from 'react'
 import NameStep from './NameStep'
 import AddressStep from './AddressStep'
 import SummaryStep from './SummaryStep'
+import { NameTemplate } from "./Templates"
 
 
 const CustomerForm = () => {
     const [step, setStep] = useState(0)
+    const [nameData, setNameData] = useState({} as NameTemplate)
 
     const renderedPage = (step: number) => {
         if (step === 0) return (
-            <NameStep />
+            <NameStep passedNameData={nameData} />
         )
         if (step === 1) return (
             <AddressStep />
