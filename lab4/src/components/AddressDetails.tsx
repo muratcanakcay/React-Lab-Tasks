@@ -2,68 +2,68 @@ import React from "react"
 import { useEffect } from "react"
 import { AddressDetailsTemplate } from "./Templates"
 import { useAddressData } from "./CustomHooks"
+import Warning from "./Warning"
 
 const AddressDetails: React.FC<{
     passedAddressData: AddressDetailsTemplate,
     onAddressChanged: (newAddress: AddressDetailsTemplate, warnings: any) => void,
-    readOnly: boolean
-}> = ({ passedAddressData, onAddressChanged, readOnly }) => {
-    const [addressData, warnings, setAddressData] = useAddressData(passedAddressData)
+    isReadOnly: boolean
+}> = ({ passedAddressData, onAddressChanged, isReadOnly }) => {
 
-    const onValueChange = (e: any): void => {
-        const newAddressData = { ...addressData, [e.target.name]: e.target.value }
-        setAddressData(newAddressData)
-    }
+    const [addressData = passedAddressData, warnings, setAddressData] = useAddressData(passedAddressData)
 
     useEffect(() => {
-        onAddressChanged(passedAddressData, warnings)
-    }, [passedAddressData, warnings]) // onAddressChanged required in [] ????
+        setAddressData(passedAddressData)
+    }, [setAddressData, passedAddressData])
+
+    useEffect(() => {
+        onAddressChanged(addressData, warnings)
+    }, [onAddressChanged, addressData, warnings])
+
+    const onValueChange = (e: any): void => {
+        setAddressData({ ...addressData, [e.target.name]: e.target.value })
+    }
 
     return (
         <div className='row'>
-            <div className='col-md-8 mb-3'>
-                <label className='form-label'>Street address</label>
+            <div className='col-md-12 mb-3'>
+                <label className='form-label'>Street Address</label>
                 <input type='text'
                     name='street'
                     className='form-control'
                     onChange={onValueChange}
-                    readOnly={readOnly} />
+                    readOnly={isReadOnly}
+                    disabled={isReadOnly}
+                    value={addressData.street || ""} />
 
-                {warnings.street &&
-                    <div style={{ color: "red" }}>
-                        {warnings.street}
-                    </div>
-                }
+                <Warning warningText={warnings.street} />
             </div>
 
             <div className='col-md-4 mb-3'>
-                <label className='form-label'>ZIP code</label>
+                <label className='form-label'>Zip Code</label>
                 <input type='text'
                     name='zipCode'
                     className='form-control'
                     onChange={onValueChange}
-                    readOnly={readOnly} />
+                    readOnly={isReadOnly}
+                    placeholder={"12-345"}
+                    disabled={isReadOnly}
+                    value={addressData.zipCode || ""} />
 
-                {warnings.zipCode &&
-                    <div style={{ color: "red" }}>
-                        {warnings.zipCode}
-                    </div>
-                }
+                <Warning warningText={warnings.zipCode} />
             </div>
 
-            <div className='col-md mb-3'>
+            <div className='col-md-8 mb-3'>
                 <label className='form-label'>City</label>
                 <input type='text'
                     name='city'
                     className='form-control'
                     onChange={onValueChange}
-                    readOnly={readOnly} />
+                    readOnly={isReadOnly}
+                    disabled={isReadOnly}
+                    value={addressData.city || ""} />
 
-                {warnings.city &&
-                    <div style={{ color: "red" }}>
-                        {warnings.city}
-                    </div>
-                }
+                <Warning warningText={warnings.city} />
             </div>
         </div>
     )

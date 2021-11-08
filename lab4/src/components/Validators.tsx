@@ -1,4 +1,3 @@
-import React from 'react'
 import { NameTemplate, AddressDetailsTemplate } from './Templates'
 
 export const nameDataValidator = (data: NameTemplate) => {
@@ -27,7 +26,7 @@ export const addressDataValidator = (data: AddressDetailsTemplate) => {
     if (!data.zipCode)
         warnings.zipCode = 'You must enter a zip code'
     else if (!/^\d{2}-\d{3}$/.test(data.zipCode))
-        warnings.zipCode = 'Zip code format is incorrect (DD-DDD)'
+        warnings.zipCode = 'Zip code format is incorrect'
 
     if (!data.city)
         warnings.city = 'You must enter a city name'
