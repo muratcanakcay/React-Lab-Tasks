@@ -8,11 +8,12 @@ const SummaryStep: React.FC<{
     passedNameData: NameTemplate
     passedAddressData: AddressTemplate
     setStep: (step: number) => void
-}> = ({ passedNameData, passedAddressData, setStep }) => {
+    deliveryAsInvoice: boolean
+}> = ({ passedNameData, passedAddressData, setStep, deliveryAsInvoice }) => {
     return (
         <div>
-            <div className="row my-2">
-                <h2 >Summary</h2 >
+            <div className="row mt-3">
+                <h1 >Summary</h1 >
                 <hr />
             </div>
 
@@ -34,7 +35,10 @@ const SummaryStep: React.FC<{
             />
 
             <div className="row my-2">
-                <h3 >Invoice Address</h3 >
+                <div>
+                    <h3 >Invoice Address</h3 >
+                    <small>{deliveryAsInvoice ? "(Delivery address used for invoice)" : ""}</small>
+                </div>
                 <hr />
             </div>
 

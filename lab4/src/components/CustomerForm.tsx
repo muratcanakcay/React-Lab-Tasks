@@ -3,7 +3,7 @@ import NameStep from './NameStep'
 import AddressStep from './AddressStep'
 import SummaryStep from './SummaryStep'
 import { AddressTemplate, NameTemplate } from "./Templates"
-
+import "./CustomerForm.css"
 
 const CustomerForm = () => {
     const [step, setStep] = useState(0)
@@ -33,6 +33,7 @@ const CustomerForm = () => {
                 passedNameData={nameData}
                 passedAddressData={addressData}
                 setStep={setStep}
+                deliveryAsInvoice={deliveryAsInvoice}
             />
         )
     }

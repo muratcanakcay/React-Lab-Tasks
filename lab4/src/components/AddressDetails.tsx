@@ -28,7 +28,8 @@ const AddressDetails: React.FC<{
         <div className='row'>
             <div className='col-md-12 mb-3'>
                 <label className='form-label'>Street Address</label>
-                <input type='text'
+                <input
+                    type='text'
                     name='street'
                     className='form-control'
                     onChange={onValueChange}
@@ -41,7 +42,8 @@ const AddressDetails: React.FC<{
 
             <div className='col-md-4 mb-3'>
                 <label className='form-label'>Zip Code</label>
-                <input type='text'
+                <input
+                    type='text'
                     name='zipCode'
                     className='form-control'
                     onChange={onValueChange}
@@ -55,7 +57,8 @@ const AddressDetails: React.FC<{
 
             <div className='col-md-8 mb-3'>
                 <label className='form-label'>City</label>
-                <input type='text'
+                <input
+                    type='text'
                     name='city'
                     className='form-control'
                     onChange={onValueChange}

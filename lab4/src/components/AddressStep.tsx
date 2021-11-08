@@ -51,23 +51,23 @@ const AddressStep: React.FC<{
 
             <div className="row my-4">
                 <h3 >Invoice Address</h3 >
+
+                {!isReadOnly &&
+                    <div className="mb-3 ms-3 form-check">
+                        <input
+                            id="delivery_as_invoice"
+                            type="checkbox"
+                            checked={deliveryAsInvoice}
+                            className="form-check-input"
+                            onChange={(e) => setDeliveryAsInvoice(e.target.checked)}
+                        />
+                        <label htmlFor="delivery_as_invoice" className="form-check-label">
+                            Use the delivery address for invoice
+                        </label>
+                    </div>
+                }
                 <hr />
             </div>
-
-            {!isReadOnly &&
-                <div className="mb-3 form-check">
-                    <input
-                        id="delivery_as_invoice"
-                        type="checkbox"
-                        checked={deliveryAsInvoice}
-                        className="form-check-input"
-                        onChange={(e) => setDeliveryAsInvoice(e.target.checked)}
-                    />
-                    <label htmlFor="delivery_as_invoice" className="form-check-label">
-                        Use the delivery address for invoice
-                    </label>
-                </div>
-            }
 
             <AddressDetails
                 passedAddressData={deliveryAsInvoice ? deliveryAddressData : invoiceAddressData}
