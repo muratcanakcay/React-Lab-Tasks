@@ -45,10 +45,10 @@ const SummaryStep: React.FC<{
             />
             <hr />
 
-            <div className='d-flex justify-content-start'>
-                <NavButton buttonText="Back to Name Step" warnings={[]} callback={() => setStep(0)} />
-                <NavButton buttonText="Back to Address Step" warnings={[]} callback={() => setStep(1)} />
-            </div>
+
+            <NavButton buttonText="Back to Name Step" warnings={[]} callback={() => setStep(0)} />
+            <NavButton buttonText="Back to Address Step" warnings={[]} callback={() => setStep(1)} />
+
 
 
 

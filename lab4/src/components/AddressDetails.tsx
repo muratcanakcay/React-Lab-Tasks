@@ -12,7 +12,6 @@ const AddressDetails: React.FC<{
     const [addressData = passedAddressData, warnings, setAddressData] = useAddressData(passedAddressData)
 
     useEffect(() => {
-        console.log("HERE")
         setAddressData(passedAddressData)
     }, [setAddressData, passedAddressData])
 
@@ -26,7 +25,7 @@ const AddressDetails: React.FC<{
 
     return (
         <div className='row'>
-            <div className='col-md-8 mb-3'>
+            <div className='col-md-12 mb-3'>
                 <label className='form-label'>Street Address</label>
                 <input type='text'
                     name='street'
@@ -61,7 +60,7 @@ const AddressDetails: React.FC<{
                 }
             </div>
 
-            <div className='col-md mb-3'>
+            <div className='col-md-8 mb-3'>
                 <label className='form-label'>City</label>
                 <input type='text'
                     name='city'
