@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { NameTemplate, AddressTemplate, AddressDetailsTemplate } from "./Templates"
+import { NameTemplate, AddressDetailsTemplate } from "./Templates"
 import { nameDataValidator, addressDataValidator } from "./Validators";
 
 export const useNameData = (

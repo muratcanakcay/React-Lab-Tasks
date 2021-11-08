@@ -9,18 +9,44 @@ const CustomerForm = () => {
     const [step, setStep] = useState(0)
     const [nameData, setNameData] = useState({} as NameTemplate)
     const [addressData, setAddressData] = useState({ deliveryAddress: {}, invoiceAddress: {} } as AddressTemplate)
+    const [deliveryAsInvoice, setDeliveryAsInvoice] = useState(false)
 
     const renderedPage = (step: number) => {
         if (step === 0) return (
-            <NameStep passedNameData={nameData} />
+            <NameStep
+                passedNameData={nameData}
+                onNameDataChange={onNameDataChange}
+                setStep={setStep}
+                isReadOnly={false}
+            />
         )
         if (step === 1) return (
-            <AddressStep passedAddressData={addressData} />
+            <AddressStep
+                passedAddressData={addressData}
+                onAddressDataChange={onAddressDataChange}
+                useDeliveryAsInvoice={deliveryAsInvoice}
+                setStep={setStep}
+                isReadOnly={false} />
         )
         if (step === 2) return (
             <SummaryStep />
         )
     }
+
+    const onNameDataChange = (newNameData: NameTemplate) => {
+        setNameData(newNameData)
+        setStep(1)
+    }
+
+    const onAddressDataChange = (newAddressData: AddressTemplate, deliveryAsInvoice: boolean) => {
+        setAddressData(newAddressData)
+        console.log("CustomerForm:")
+        console.log(newAddressData.deliveryAddress)
+        console.log(newAddressData.invoiceAddress)
+        setDeliveryAsInvoice(deliveryAsInvoice)
+        setStep(2)
+    }
+
     return (
         <div className="container mt-5">
             {renderedPage(step)}
