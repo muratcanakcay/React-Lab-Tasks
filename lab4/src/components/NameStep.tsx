@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 import { NameTemplate } from "./Templates"
 import { useNameData } from "./CustomHooks"
 
