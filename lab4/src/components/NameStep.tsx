@@ -2,6 +2,8 @@ import React from "react"
 import { NameTemplate } from "./Templates"
 import { useNameData } from "./CustomHooks"
 import NavButton from "./NavButton"
+import Warning from "./Warning"
+
 
 const NameStep: React.FC<{
     passedNameData: NameTemplate
@@ -34,11 +36,8 @@ const NameStep: React.FC<{
                         onChange={onValueChange}
                         readOnly={isReadOnly}
                         value={nameData.firstName || ""} />
-                    {warnings.firstName &&
-                        <div style={{ color: "red" }}>
-                            {warnings.firstName}
-                        </div>
-                    }
+
+                    <Warning warningText={warnings.firstName} />
                 </div>
 
                 <div className='col-md-6 mb-3'>
@@ -49,11 +48,8 @@ const NameStep: React.FC<{
                         onChange={onValueChange}
                         readOnly={isReadOnly}
                         value={nameData.lastName || ""} />
-                    {warnings.lastName &&
-                        <div style={{ color: "red" }}>
-                            {warnings.lastName}
-                        </div>
-                    }
+
+                    <Warning warningText={warnings.lastName} />
                 </div>
 
                 <div className='col-md mb-3'>
@@ -65,11 +61,8 @@ const NameStep: React.FC<{
                         readOnly={isReadOnly}
                         placeholder={"example@domain.com"}
                         value={nameData.email || ""} />
-                    {warnings.email &&
-                        <div style={{ color: "red" }}>
-                            {warnings.email}
-                        </div>
-                    }
+
+                    <Warning warningText={warnings.email} />
                 </div>
             </div>
 

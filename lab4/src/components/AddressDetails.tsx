@@ -2,6 +2,7 @@ import React from "react"
 import { useEffect } from "react"
 import { AddressDetailsTemplate } from "./Templates"
 import { useAddressData } from "./CustomHooks"
+import Warning from "./Warning"
 
 const AddressDetails: React.FC<{
     passedAddressData: AddressDetailsTemplate,
@@ -35,11 +36,7 @@ const AddressDetails: React.FC<{
                     disabled={isReadOnly}
                     value={addressData.street || ""} />
 
-                {warnings.street &&
-                    <div style={{ color: "red" }}>
-                        {warnings.street}
-                    </div>
-                }
+                <Warning warningText={warnings.street} />
             </div>
 
             <div className='col-md-4 mb-3'>
@@ -53,11 +50,7 @@ const AddressDetails: React.FC<{
                     disabled={isReadOnly}
                     value={addressData.zipCode || ""} />
 
-                {warnings.zipCode &&
-                    <div style={{ color: "red" }}>
-                        {warnings.zipCode}
-                    </div>
-                }
+                <Warning warningText={warnings.zipCode} />
             </div>
 
             <div className='col-md-8 mb-3'>
@@ -70,11 +63,7 @@ const AddressDetails: React.FC<{
                     disabled={isReadOnly}
                     value={addressData.city || ""} />
 
-                {warnings.city &&
-                    <div style={{ color: "red" }}>
-                        {warnings.city}
-                    </div>
-                }
+                <Warning warningText={warnings.city} />
             </div>
         </div>
     )
