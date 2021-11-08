@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import { AddressTemplate, AddressDetailsTemplate } from "./Templates"
 import AddressDetails from "./AddressDetails"
-import NextButton from "./NextButton"
-const NameStep: React.FC<{
+import NavButton from "./NavButton"
+
+const AddressStep: React.FC<{
     passedAddressData: AddressTemplate,
     onAddressDataChange: (newAddressData: AddressTemplate, deliveryAsInvoice: boolean) => void,
     setStep: (step: number) => void
@@ -28,43 +29,30 @@ const NameStep: React.FC<{
         setInvoiceWarnings(warnings)
     }
 
-    const onCheckboxClicked = (e: any): void => {
-        setDeliveryAsInvoice(e.target.checked)
-
-        if (e.target.checked) {
-            console.log("ifchecked")
-            onInvoiceAddressChange(deliveryAddressData, deliveryWarnings)
-        }
-    }
-
     const onNextButtonClicked = (): void => {
-        if (deliveryAsInvoice)
-            onAddressDataChange({
-                ...passedAddressData,
-                deliveryAddress: deliveryAddressData,
-                invoiceAddress: deliveryAddressData,
-
-            },
-                deliveryAsInvoice
-            )
-
-        else
-            onAddressDataChange({
-                ...passedAddressData,
-                deliveryAddress: deliveryAddressData,
-                invoiceAddress: invoiceAddressData
-            },
-                deliveryAsInvoice
-            )
+        onAddressDataChange({
+            ...passedAddressData,
+            deliveryAddress: deliveryAddressData,
+            invoiceAddress: invoiceAddressData,
+        },
+            deliveryAsInvoice
+        )
     }
 
     return (
         <div>
-            <h3>Delivery Address</h3>
+            <div className="row my-4">
+                <h3 >Delivery Address</h3 >
+                <hr />
+            </div>
+
             <AddressDetails passedAddressData={deliveryAddressData} onAddressChanged={onDeliveryAddressChange} isReadOnly={isReadOnly} />
             <hr />
 
-            <h3>Invoice Address</h3>
+            <div className="row my-4">
+                <h3 >Invoice Address</h3 >
+                <hr />
+            </div>
 
             {!isReadOnly &&
                 <div className="mb-3 form-check">
@@ -72,21 +60,22 @@ const NameStep: React.FC<{
                         type="checkbox"
                         checked={deliveryAsInvoice}
                         className="form-check-input"
-                        onChange={onCheckboxClicked} />
+                        onChange={(e) => setDeliveryAsInvoice(e.target.checked)} />
                     <label htmlFor="delivery_as_invoice" className="form-check-label">
                         Use the delivery address for invoice
                     </label>
                 </div>
             }
 
-            {deliveryAsInvoice
-                ? <AddressDetails passedAddressData={deliveryAddressData} onAddressChanged={onInvoiceAddressChange} isReadOnly={true} />
-                : <AddressDetails passedAddressData={invoiceAddressData} onAddressChanged={onInvoiceAddressChange} isReadOnly={isReadOnly} />
-            }
+            <AddressDetails
+                passedAddressData={deliveryAsInvoice ? deliveryAddressData : invoiceAddressData}
+                onAddressChanged={onInvoiceAddressChange}
+                isReadOnly={deliveryAsInvoice ? true : isReadOnly} />
 
             {!isReadOnly &&
-                <div className='d-flex justify-content-end'>
-                    <NextButton warnings={[deliveryWarnings, invoiceWarnings]} callback={onNextButtonClicked} />
+                <div className='d-flex justify-content-between'>
+                    <NavButton buttonText="Back to Name Step" warnings={[]} callback={() => setStep(0)} />
+                    <NavButton buttonText="Next" warnings={[deliveryWarnings, invoiceWarnings]} callback={onNextButtonClicked} />
                 </div>
             }
 
@@ -95,4 +84,4 @@ const NameStep: React.FC<{
     )
 }
 
-export default NameStep
+export default AddressStep

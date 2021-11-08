@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NameTemplate, AddressDetailsTemplate } from "./Templates"
 import { nameDataValidator, addressDataValidator } from "./Validators";
 
 export const useNameData = (
     passedNameData: NameTemplate
-): [NameTemplate, any, Dispatch<SetStateAction<NameTemplate>>] => {
+): [NameTemplate, any, any] => {
     const [warnings, setWarnings] = useState({})
     const [nameData, setNameData] = useState(passedNameData)
 
@@ -17,7 +17,7 @@ export const useNameData = (
 
 export const useAddressData = (
     passedAddressData: AddressDetailsTemplate
-): [AddressDetailsTemplate, any, Dispatch<SetStateAction<AddressDetailsTemplate>>] => {
+): [AddressDetailsTemplate, any, any] => {
     const [warnings, setWarnings] = useState({})
     const [addressData, setAddressData] = useState<AddressDetailsTemplate>(passedAddressData)
 

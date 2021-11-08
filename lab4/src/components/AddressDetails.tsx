@@ -8,19 +8,21 @@ const AddressDetails: React.FC<{
     onAddressChanged: (newAddress: AddressDetailsTemplate, warnings: any) => void,
     isReadOnly: boolean
 }> = ({ passedAddressData, onAddressChanged, isReadOnly }) => {
-    const [addressData, warnings, setAddressData] = useAddressData(passedAddressData)
 
-    const onValueChange = (e: any): void => {
-        console.log("value changed")
-        setAddressData({ ...addressData, [e.target.name]: e.target.value })
-    }
+    const [addressData = passedAddressData, warnings, setAddressData] = useAddressData(passedAddressData)
 
     useEffect(() => {
-        if (!isReadOnly) {
-            onAddressChanged(addressData, warnings)
-            console.log(addressData)
-        }
-    }, [onAddressChanged, addressData, warnings, isReadOnly])
+        console.log("HERE")
+        setAddressData(passedAddressData)
+    }, [setAddressData, passedAddressData])
+
+    useEffect(() => {
+        onAddressChanged(addressData, warnings)
+    }, [onAddressChanged, addressData, warnings])
+
+    const onValueChange = (e: any): void => {
+        setAddressData({ ...addressData, [e.target.name]: e.target.value })
+    }
 
     return (
         <div className='row'>

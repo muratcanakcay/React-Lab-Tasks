@@ -15,44 +15,42 @@ const CustomerForm = () => {
         if (step === 0) return (
             <NameStep
                 passedNameData={nameData}
-                onNameDataChange={onNameDataChange}
-                setStep={setStep}
+                onNameDataChange={onNameDataAccepted}
                 isReadOnly={false}
             />
         )
         if (step === 1) return (
             <AddressStep
                 passedAddressData={addressData}
-                onAddressDataChange={onAddressDataChange}
+                onAddressDataChange={onAddressDataAccepted}
                 useDeliveryAsInvoice={deliveryAsInvoice}
                 setStep={setStep}
-                isReadOnly={false} />
+                isReadOnly={false}
+            />
         )
         if (step === 2) return (
-            <SummaryStep />
+            <SummaryStep
+                passedNameData={nameData}
+                passedAddressData={addressData}
+                setStep={setStep}
+            />
         )
     }
 
-    const onNameDataChange = (newNameData: NameTemplate) => {
+    const onNameDataAccepted = (newNameData: NameTemplate) => {
         setNameData(newNameData)
         setStep(1)
     }
 
-    const onAddressDataChange = (newAddressData: AddressTemplate, deliveryAsInvoice: boolean) => {
+    const onAddressDataAccepted = (newAddressData: AddressTemplate, deliveryAsInvoice: boolean) => {
         setAddressData(newAddressData)
-        console.log("CustomerForm:")
-        console.log(newAddressData.deliveryAddress)
-        console.log(newAddressData.invoiceAddress)
         setDeliveryAsInvoice(deliveryAsInvoice)
         setStep(2)
     }
 
     return (
-        <div className="container mt-5">
+        <div className="container mt-10">
             {renderedPage(step)}
-            <div>
-                <button className="btn btn-dark" onClick={() => { setStep((step + 1) % 3) }}>Next</button>
-            </div>
         </div>
     )
 }

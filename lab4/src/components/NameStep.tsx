@@ -1,14 +1,13 @@
 import React from "react"
 import { NameTemplate } from "./Templates"
 import { useNameData } from "./CustomHooks"
-import NextButton from "./NextButton"
+import NavButton from "./NavButton"
 
 const NameStep: React.FC<{
     passedNameData: NameTemplate
     onNameDataChange: (newNameData: NameTemplate) => void,
-    setStep: (step: number) => void
     isReadOnly: boolean
-}> = ({ passedNameData, onNameDataChange, setStep, isReadOnly }) => {
+}> = ({ passedNameData, onNameDataChange, isReadOnly }) => {
 
     const [nameData, warnings, setNameData] = useNameData(passedNameData)
 
@@ -21,6 +20,10 @@ const NameStep: React.FC<{
 
     return (
         <div>
+            <div className="row my-4">
+                <h3 >Name and E-mail</h3 >
+                <hr />
+            </div>
 
             <div className='row'>
                 <div className='col-md-6 mb-3'>
@@ -72,7 +75,7 @@ const NameStep: React.FC<{
 
             {!isReadOnly &&
                 <div className='d-flex justify-content-end'>
-                    <NextButton warnings={[warnings]} callback={onNextButtonClicked} />
+                    <NavButton buttonText="Next" warnings={[warnings]} callback={onNextButtonClicked} />
                 </div>
             }
 
