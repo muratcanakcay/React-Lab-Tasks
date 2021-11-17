@@ -1,6 +1,8 @@
 import { combineReducers } from "redux"
-import dummyReducer from "./dummyReducer"
+import rowsReducer from "./rowsReducer"
+import colsReducer from "./colsReducer"
 
 export default combineReducers({
-    dummy: dummyReducer
+    nRows: rowsReducer,
+    nCols: colsReducer
 })
