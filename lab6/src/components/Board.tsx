@@ -1,10 +1,11 @@
 import React from 'react'
+import "./Board.css"
 
-const rows = (nRows: number, nCols: number) => {
+const rows = (nRows: number) => {
     return (
         Array.from(new Array(nRows)).map((_, rowNo) => (
             <tr key={rowNo}>
-                {cols(rowNo, nCols)}
+                {cols(rowNo, nRows)}
             </tr>
         )
         ))
@@ -19,14 +20,13 @@ const cols = (rowNo: number, nCols: number) => {
 }
 
 const Board: React.FC<{
-    nRows: number,
-    nCols: number
-}> = ({ nRows, nCols }) => {
+    nRows: number
+}> = ({ nRows }) => {
     return (
         <div>
-            <table className="chess-board">
+            <table className="chess-board border border-secondary">
                 <tbody>
-                    {rows(nRows, nCols)}
+                    {rows(nRows)}
                 </tbody>
             </table>
         </div>
