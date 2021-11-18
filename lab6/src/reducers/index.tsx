@@ -1,6 +1,8 @@
 import { combineReducers } from "redux"
 import boardReducer from "./boardReducer"
+import snakeReducer from "./snakeReducer"
 
 export default combineReducers({
-    nRows: boardReducer,
+    boardSize: boardReducer,
+    snake: snakeReducer
 })
