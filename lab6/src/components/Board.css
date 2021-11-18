@@ -1,3 +1,5 @@
+table {cursor:none}
+table {    caret-color: rgba(0,0,0,0) }
 table.chess-board { border-spacing: 0; border-collapse: collapse; }
 table.chess-board td { width: 10px; height: 10px; }
 table.chess-board .light { background: rgb(175, 205, 228); }

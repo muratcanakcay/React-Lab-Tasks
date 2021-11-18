@@ -23,9 +23,12 @@ const cols = (rowNo: number, size: number, snake: pos[]) => {
 }
 
 const checkSnake = (rowNo: number, colNo: number, snake: pos[]) => {
-    if (snake.some(snakePart => snakePart.r === rowNo && snakePart.c === colNo)) return "snake"
 
-    return (rowNo + colNo) % 2 ? "light" : "dark"
+    return snake.some(snakePart => snakePart.r === rowNo && snakePart.c === colNo)
+        ? "snake"
+        : (rowNo + colNo) % 2
+            ? "light"
+            : "dark"
 }
 
 const Board: React.FC<{
