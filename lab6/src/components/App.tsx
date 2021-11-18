@@ -5,35 +5,12 @@ import Board from './Board'
 import { setBoardSize } from '../actions'
 import { setSnake } from '../actions'
 
-document.addEventListener('keydown', function (event) {
-    switch (event.key) {
-        case "ArrowUp":
-            console.log("UP")
-            break
-        case "ArrowDown":
-            console.log("DOWN")
-            break
-        case "ArrowLeft":
-            console.log("LEFT")
-            break
-        case "ArrowRight":
-            console.log("RIGHT")
-            break
-        default:
-    }
-})
-
-const App: React.FC = (props: any) => {
+const App: React.FC<{}> = (props: any) => {
     const [setSize, setSnake, boardSize, snake] = [props.setSize, props.setSnake, props.boardSize, props.snake]
 
     useEffect(() => {
         setSnake([{ r: boardSize / 2, c: boardSize / 2 }])
     }, [setSnake, boardSize])
-
-
-
-
-
 
     return (
         <div className="container" style={{ marginTop: "10px" }}>
