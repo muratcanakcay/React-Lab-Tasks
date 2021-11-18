@@ -14,3 +14,11 @@ export const setSnake = (snake: pos[]) => {
         payload: snake
     }
 }
+
+export const placeFood = (food: pos) => {
+    return {
+        type: "SET_FOOD_POS",
+        payload: food
+    }
+}
+

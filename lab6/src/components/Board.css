@@ -5,3 +5,4 @@ table.chess-board td { width: 10px; height: 10px; }
 table.chess-board .light { background: rgb(175, 205, 228); }
 table.chess-board .dark { background: rgb(172, 193, 236); }
 table.chess-board .snake { background: rgb(70, 170, 13); }
+table.chess-board .food { background: rgb(236, 55, 9); }
