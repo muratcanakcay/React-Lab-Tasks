@@ -89,7 +89,7 @@ const App: React.FC<{}> = (props: any) => {
     return (
         <div className="container" style={{ marginTop: "10px" }}>
             <div className="d-flex justify-content-center align-items-center">
-                <Board size={boardSize} snake={snake} food={food} />
+                <Board />
             </div>
             <div className="mt-3">
                 <button className="btn btn-dark me-3" onClick={() => setSize(1)}>Small</button>

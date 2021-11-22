@@ -1,5 +1,5 @@
 import React from 'react'
-//import { connect } from "react-redux"
+import { connect } from "react-redux"
 import "./Board.css"
 //import { setSnake } from '../actions'
 import { pos } from '../interfaces'
@@ -33,21 +33,24 @@ const checkSnake = (rowNo: number, colNo: number, snake: pos[], food: pos) => {
                 : "dark"
 }
 
-const Board: React.FC<{
-    size: number,
-    snake: pos[]
-    food: pos
-}> = ({ size, snake, food }) => {
+const Board: React.FC<{}> =
+    (props: any) => {
 
-    return (
-        <div>
-            <table className="chess-board border border-4 border-primary">
-                <tbody>
-                    {rows(size, snake, food)}
-                </tbody>
-            </table>
-        </div>
-    )
+        const [boardSize, snake, food] = [props.boardSize, props.snake as pos[], props.food as pos]
+
+        return (
+            <div>
+                <table className="board">
+                    <tbody>
+                        {rows(boardSize, snake, food)}
+                    </tbody>
+                </table>
+            </div>
+        )
+    }
+
+const mapStateToProps = (state: { snake: pos[], boardSize: number, food: pos }) => {
+    return { snake: state.snake, boardSize: state.boardSize, food: state.food }
 }
 
-export default (Board)
+export default connect(mapStateToProps)(Board)

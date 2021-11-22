@@ -1,8 +1,6 @@
-table {cursor:none}
-table {    caret-color: rgba(0,0,0,0) }
-table.chess-board { border-spacing: 0; border-collapse: collapse; }
-table.chess-board td { width: 10px; height: 10px; }
-table.chess-board .light { background: rgb(175, 205, 228); }
-table.chess-board .dark { background: rgb(172, 193, 236); }
-table.chess-board .snake { background: rgb(70, 170, 13); }
-table.chess-board .food { background: rgb(236, 55, 9); }
+table.board { box-shadow: 0 0 0 5px blue; cursor:none; caret-color: rgba(0,0,0,0); border-spacing: 0; border-collapse: collapse; }
+table.board td { width: 10px; height: 10px; }
+table.board .light { background: rgb(175, 205, 228); }
+table.board .dark { background: rgb(172, 193, 236); }
+table.board .snake { background: rgb(70, 170, 13); }
+table.board .food { background: rgb(236, 55, 9); }
